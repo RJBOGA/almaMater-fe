@@ -1,0 +1,95 @@
+  
+  table {
+    width: 90%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    margin-left: auto; /* Align table to the center */
+    margin-right: auto; /* Align table to the center */
+  }  
+  
+  input[type="edit"],
+  input[type="submit"],
+  input[type="save"],
+  input[type="back"] {
+    background-color: #cf202e;
+  }
+  
+  h1 {
+    color: #333;
+    text-align: center;
+  }
+
+  h2 {
+    color: #333;
+    text-align: center;
+  }
+  
+  .user-profile-details {
+    margin-bottom: 20px;
+  }
+  
+  .user-profile-details p {
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+  
+  button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-right: 10px;
+    display: block;
+    margin: 0 auto;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  th,
+  td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  th {
+    background-color: #f2f2f2;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .form-group label {
+    display: inline-block;
+    width: 150px;
+    text-align: center;
+  }
+  
+  .form-group input[type="text"],
+  .form-group input[type="email"],
+  .form-group input[type="password"],
+  .form-group input[type="number"],
+  .form-group input[type="tel"] {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+  }
+
+  .user-profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    //min-height: 100vh; /* Ensures the div fills the viewport height */
+  }
+  
+  .section h2 {
+    border-top: 2px solid #cf202e;
+    padding-bottom: 1rem;
+  }
+  

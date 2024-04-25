@@ -1,0 +1,98 @@
+<app-header></app-header>
+<app-footer></app-footer>
+<header style="background-color: #333;">
+    <div class="button-container">
+        <a (click)="goToPage('account')">My Account</a>
+        <a href="profile">Logout</a>
+    </div>
+</header>
+<!-- <p>user-home works!</p>
+<div class="button-row">
+    <button (click)="goToPage('register')">register</button>
+</div>
+<div class="button-row">
+    <button (click)="goToPage('home')">user-home</button>
+</div>
+<div class="button-row">
+    <button (click)="goToPage('account')">profile</button>
+</div>
+<div class="button-row">
+    <button (click)="goToPage('createJob')">create a job</button>
+</div>
+<div class="button-row">
+    <button (click)="goToPage('')">home</button>
+</div> -->
+
+<!-- <header [style.backgroundColor]="'crimson'">
+    <div>
+      <a routerLink="/user-profile">My Account</a>
+    </div>
+    <div>
+      <a routerLink="/logout">Logout</a>
+    </div>
+  </header> -->
+  <main>
+    <h1>Welcome to University of Central Missouri Alums</h1>
+    <div class="section">
+        <h2>Find a Job</h2>
+        <p>
+          Explore job opportunities posted by alumni and partner organizations to
+          advance your career.
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Job Id</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Experience</th>
+              <th>Technical Skills</th>
+              <th>Contact</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let job of jobsList">
+              <td>{{ job.jobId }}</td>
+              <td>{{ job.profile }}</td>
+              <td>{{ job.desc }}</td>
+              <td>{{ job.exp }}</td>
+              <td>{{ job.techs }}</td>
+              <td>{{ job.contact }}</td>
+              <td>{{ job.datePosted }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    
+      <div class="section">
+        <div>
+          <a routerLink="/post-job">Are you hiring?</a> Please help one of your
+          alumni get a job.
+        </div>
+      </div>
+    <div class="section">
+      <h2>Find a Mentor or Fellow Student</h2>
+      <p>
+        Connect with alumni and current students to share experiences, gain
+        insights, and build valuable relationships.
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Profession</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let alumni of alumniList">
+            <td>{{ alumni.firstName + ', ' + alumni.lastName }}</td>
+            <td>{{ alumni.email }}</td>
+            <td>{{ alumni.profession }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+  

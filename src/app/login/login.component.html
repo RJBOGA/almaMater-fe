@@ -1,0 +1,52 @@
+<app-header></app-header>
+<mat-card>
+    <mat-card-content>
+      <div class="header">
+        <P>Sign Into Your Account </P>
+      </div>
+      <form (ngSubmit)="onLogin()" name="loginForm" [formGroup]="loginForm">
+        <div class="studentIdInput">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Student ID</mat-label>
+            <input
+              formControlName="studentId"
+              matInput
+              type="number"
+              placeholder="Enter student ID" required
+            />
+            <mat-error *ngIf="!loginForm.controls['studentId'].valid">
+              Student ID is required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        
+
+        <div>
+          <!-- <span>
+            <a class="text-link" class="aLink" routerLink="/auth/forgot-password">Forgot Password?</a>
+          </span> -->
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input formControlName="password" matInput [type]=" hide ? 'password' : 'text'" required />
+            <button  mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide Password'"
+            [attr.aria-pressed]="hide">
+            <mat-icon>
+                {{hide ? 'visibility_off' : 'visibility'}}
+            </mat-icon>
+        </button>
+        <mat-error *ngIf="!loginForm.controls['password'].valid">
+            Password is required
+          </mat-error>
+        </mat-form-field>
+        </div>
+        <button mat-flat-button color="primary">Login</button>
+        <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+      </form>
+
+      <div class="button-row">
+        <button (click)="goToPage('register')">Create New Account</button>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <app-footer></app-footer>
+  <router-outlet></router-outlet>

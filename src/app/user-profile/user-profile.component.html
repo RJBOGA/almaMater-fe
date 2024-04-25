@@ -1,0 +1,97 @@
+<app-header></app-header>
+<!-- <app-footer></app-footer> -->
+
+<div class="user-profile-container">
+<div *ngIf="!isEditMode">
+    <h2>Student Profile</h2>
+  <p>Student ID: {{ user.studentId }}</p>
+  <p>Email: {{ user.email }}</p>
+  <p>First Name: {{ user.firstName }}</p>
+  <p>Last Name: {{ user.lastName }}</p>
+  <p>Department: {{ user.department }}</p>
+  <p>Graduation Year: {{ user.graduationYear }}</p>
+  <p>Profession: {{ user.profession }}</p>
+  <p>Contact Number: {{ user.contactNumber }}</p>
+  <p>Address: {{ user.address }}</p>
+  <button (click)="toggleEditMode()">Edit</button>
+  <br>
+</div>
+</div>
+
+<div *ngIf="isEditMode">
+    <h2>Student Profile</h2>
+    <form [formGroup]="editForm" (ngSubmit)="submitEdit()">
+      <div class="form-group">
+        <label for="studentId">Student ID:</label>
+        <input type="text" id="studentId" formControlName="studentId" readonly>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" formControlName="email">
+      </div>
+      <div class="form-group">
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" formControlName="firstName">
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" formControlName="lastName">
+      </div>
+      <div class="form-group">
+        <label for="department">Department:</label>
+        <input type="text" id="department" formControlName="department">
+      </div>
+      <div class="form-group">
+        <label for="graduationYear">Graduation Year:</label>
+        <input type="number" id="graduationYear" formControlName="graduationYear">
+      </div>
+      <div class="form-group">
+        <label for="profession">Profession:</label>
+        <input type="text" id="profession" formControlName="profession">
+      </div>
+      <div class="form-group">
+        <label for="contactNumber">Contact Number:</label>
+        <input type="tel" id="contactNumber" formControlName="contactNumber">
+      </div>
+      <div class="form-group">
+        <label for="address">Address:</label>
+        <input type="text" id="address" formControlName="address">
+      </div>
+      <button type="submit">Save</button><br>
+      <button type="button" (click)="toggleEditMode()">Cancel</button>
+      <br>
+    </form>
+  </div>
+
+
+<div class="section">
+  <h2>Jobs Posted by Me</h2>
+  <table *ngIf="jobsList">
+    <thead>
+      <tr>
+        <th>Job Id</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Experience</th>
+        <th>Technical Skills</th>
+        <th>Contact</th>
+        <th>Date Posted</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let job of jobsList">
+        <td>{{ job.jobId }}</td>
+        <td>{{ job.profile }}</td>
+        <td>{{ job.desc }}</td>
+        <td>{{ job.exp }}</td>
+        <td>{{ job.techs }}</td>
+        <td>{{ job.contact }}</td>
+        <td>{{ job.datePosted }}</td>
+        <td>
+            <button (click)="deleteJob(job.jobId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
