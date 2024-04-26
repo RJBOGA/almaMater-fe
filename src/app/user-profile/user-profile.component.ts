@@ -16,7 +16,7 @@ import { CookieService } from 'ngx-cookie-service';
   styleUrl: './user-profile.component.scss'
 })
 export class UserProfileComponent implements OnInit {
-  user: any; // Type should be updated based on the user model
+  user: any; 
   jobsList: Job[] =[];
   userFb!: User;
   editForm!: FormGroup;
@@ -24,7 +24,7 @@ export class UserProfileComponent implements OnInit {
   disabled: boolean = false;
   studentId: any;
 
-  constructor(private http: HttpClient, private userService: UserService, private fb: FormBuilder, private jobServ: JobService, private cookieService: CookieService, private router:Router, private app:AppModule) { }
+  constructor(private userService: UserService, private fb: FormBuilder, private jobServ: JobService, private cookieService: CookieService, private router:Router, private app:AppModule) { }
 
   ngOnInit(): void {
     const loggedIn = sessionStorage.getItem('isLoggedIn');
@@ -35,7 +35,7 @@ export class UserProfileComponent implements OnInit {
     this.studentId = this.cookieService.get('studentId');
     this.user = JSON.parse(sessionStorage.getItem('studentDetails')||"");
     this.fetchJobs();
-    // Initialize edit form with user details
+    
     this.editForm = this.fb.group({
       studentId: [{ value: this.user.studentId, disabled: true }],
       email: [this.user.email],
@@ -50,34 +50,48 @@ export class UserProfileComponent implements OnInit {
   }
 
   fetchJobs(): void {
-    this.http.get<Job[]>('http://localhost:8081/alma-mater/getAllJobs')
-      .subscribe(jobs => this.jobsList = jobs);
+    this.jobServ.getJobsOfUser(this.studentId).subscribe(
+      (response: Job[]) => { 
+        console.log('Jobs retrieved successfully:', response);
+        this.jobsList = response; 
+      },
+      (error) => {
+        console.error('Error retrieving jobs:', error);
+      }
+    );
   }
 
   toggleEditMode(): void {
     this.isEditMode = !this.isEditMode;
   }
 
+  updateUserObject(): void {
+    this.user.email = this.editForm.get('email')?.value;
+    this.user.firstName = this.editForm.get('firstName')?.value;
+    this.user.lastName = this.editForm.get('lastName')?.value;
+    this.user.department = this.editForm.get('department')?.value;
+    this.user.graduationYear = this.editForm.get('graduationYear')?.value;
+    this.user.profession = this.editForm.get('profession')?.value;
+    this.user.contactNumber = this.editForm.get('contactNumber')?.value;
+    this.user.address = this.editForm.get('address')?.value;
+  }
+
   submitEdit(): void {
     if (this.editForm.valid) {
-      console.log("submitEdit")
+      this.updateUserObject(); 
       const userdetails: User = JSON.parse(sessionStorage.getItem('studentDetails')||"")
       const editedUser: User = this.editForm.value;
       editedUser.studentId = userdetails.studentId;
       editedUser.dateTime = userdetails.dateTime;
 
-      console.log("User",editedUser)
       this.userService.updateUser(editedUser).subscribe(
         response => {
           console.log('User details updated successfully:', response);
-          // Update user details in session storage
           sessionStorage.setItem('studentDetails', JSON.stringify(editedUser));
-          // Switch back to view mode
           this.isEditMode = false;
         },
         error => {
           console.error('Error updating user details:', error);
-          // Handle error
         }
       );
     }
@@ -100,5 +114,7 @@ export class UserProfileComponent implements OnInit {
   logout(){
     this.app.logout();
   }
-  
+  goToPage(pageName: String){
+    this.app.goToPage(pageName);
+  }
 }
