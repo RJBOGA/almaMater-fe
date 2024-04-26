@@ -55,4 +55,15 @@ export class AppModule {
   goToPage(pageName: String): void {
     this.router.navigate([`${pageName}`]);
   }
+
+  logout():void{
+    // sessionStorage.clear;
+    // document.cookie = `studentId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+    // this.router.navigate([`${``}`]);
+    sessionStorage.removeItem('studentId');
+    sessionStorage.removeItem('studentDetails');
+    sessionStorage.removeItem('isLoggedIn');
+    document.cookie = `studentId=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+    this.router.navigate([`${``}`]);
+  }
 }

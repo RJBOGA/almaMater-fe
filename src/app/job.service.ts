@@ -21,8 +21,8 @@ export class JobService {
     return this.http.get<Job[]>(`${this.baseUrl}/getAllJobs`);
   }
 
-  deleteJob(studentId: number, jobId: number): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}/deleteJob/${studentId}/${jobId}`);
+  deleteJob( jobId: number): Observable<void> {
+    return this.http.delete<void>(`${this.baseUrl}/deleteJob/${jobId}`);
   }
 
   getJobsOfUser(userId: number): Observable<Job[]> {

@@ -1,2 +1,33 @@
-<app-header></app-header><p>job works!</p>
+<app-header></app-header>
 <app-footer></app-footer>
+<h2>Create a Job</h2>
+<main>
+  <form [formGroup]="jobForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="profile">Job Title:</label>
+      <input type="text" id="profile" formControlName="profile" required>
+    </div>
+    <div class="form-group">
+      <label for="desc">Job Description:</label>
+      <input type="text" id="desc" formControlName="desc" required>
+    </div>
+    <div class="form-group">
+      <label for="exp">Experience (in years):</label>
+      <input type="number" id="exp" formControlName="exp" required>
+    </div>
+    <div class="form-group">
+      <label for="techs">Required Technical Skills:</label>
+      <input type="text" id="techs" formControlName="techs" required>
+    </div>
+    <div class="form-group">
+      <label for="contact">Contact Email:</label>
+      <input type="email" id="contact" formControlName="contact" required>
+    </div>
+    <div class="form-group">
+        <div class="error-message" *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+        <button mat-flat-button color="primary">Create Job</button>
+        <div></div>
+    </div>
+    <div></div>
+  </form>
+</main>

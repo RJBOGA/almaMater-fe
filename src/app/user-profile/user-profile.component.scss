@@ -92,4 +92,34 @@
     border-top: 2px solid #cf202e;
     padding-bottom: 1rem;
   }
+  header a {
+    color: #fff;
+    text-decoration: none;
+    margin-right: auto;
+  }
   
+  header a:hover {
+    text-decoration: underline;
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: space-between; /* Ensures buttons are at opposite corners */
+    align-items: flex-end; /* Aligns buttons to bottom corners (optional) */
+    margin: 0 auto; /* Centers the container horizontally */
+  }
+  
+  .button-container a {
+    //background-color: #cf202e;
+    padding: 10px 20px;
+    margin: 5px;
+    text-decoration: none;
+    color: #ffffff;
+    font-family: sans-serif;
+    cursor: pointer;
+    display: inline-block; /* Ensures buttons don't wrap to new lines */
+  }
+  
+  .button-container a:hover {
+    background-color: #e0e0e0;
+  }

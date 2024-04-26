@@ -3,6 +3,7 @@ import { AppModule } from '../app.module';
 import { User } from '../models/user.model';
 import { Job } from '../models/job.model';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-home',
@@ -11,13 +12,21 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserHomeComponent  {
 
+  UserName: any ;
   alumniList: User[] = [];
   jobsList: Job[] = [];
-  constructor(private app:AppModule, private http: HttpClient){}
+  constructor(private app:AppModule, private http: HttpClient, private router:Router){}
 
   ngOnInit() {
     this.fetchAlumni();
     this.fetchJobs();
+    const loggedIn = sessionStorage.getItem('isLoggedIn');
+    this.UserName = sessionStorage.getItem('Name') || null;
+    if(loggedIn != 'YES'){
+      console.log(loggedIn)
+      this.router.navigate([``]);
+      
+    }
   }
   
   fetchAlumni() {
@@ -31,6 +40,9 @@ export class UserHomeComponent  {
   }
   goToPage(pageName: String){
     this.app.goToPage(pageName);
+  }
+  logout(){
+    this.app.logout();
   }
 
 }

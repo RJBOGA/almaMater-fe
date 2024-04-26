@@ -46,10 +46,18 @@
 
 
     <div class="form-group">
-      <input type="submit" value="Create Account">
+      <div class="error-message" *ngIf="errorMessage" style="color: red;">{{ errorMessage }}</div>
+      <button mat-flat-button color="primary">Create Account</button><br><br>
+      <button (click)="goToPage('')" mat-flat-button color="primary">Already have an account?</button>
     </div>
+    <div></div>
+    <div></div>
+    <div></div>
     <div class="button-row">
         <button (click)="goToPage('')">Already have an account?</button>
       </div>
+      <div></div>
+      <div></div>
+      <div></div>
   </form>
 </main>

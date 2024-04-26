@@ -12,29 +12,24 @@ import { User } from '../models/user.model';
 })
 export class RegisterComponent {
 
+  errorMessage: String ='';
+
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private app:AppModule, private userService: UserService) {
+  constructor(private fb: FormBuilder, private app:AppModule, private userService: UserService, private router:Router) {
     this.registerForm = this.fb.group({
       studentId: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      department: ['', Validators.required],
-      graduationYear: ['', Validators.required],
-      profession: ['', Validators.required],
-      contactNumber: ['', Validators.required],
-      address: ['', Validators.required]
+      password: ['', Validators.required  ],
+      firstName: ['', Validators.required  ],
+      lastName: ['', Validators.required  ],
+      department: ['', Validators.required  ],
+      graduationYear: ['', Validators.required  ],
+      profession: ['', Validators.required  ],
+      contactNumber: ['', Validators.required  ],
+      address: ['', Validators.required  ]
     });
   }
-
-  // onSubmit(): void {
-  //   if (this.registerForm.valid) {
-  //     // Process form submission here
-  //     console.log(this.registerForm.value);
-  //   }
-  // }
 
   onSubmit(): void {
     if (this.registerForm.valid) {
@@ -43,15 +38,17 @@ export class RegisterComponent {
       this.userService.addUser(userData).subscribe(
         response => {
           console.log('User added successfully:', response);
-          // Handle success
+          this.router.navigate(['/login']);
+          
         },
         error => {
           console.error('Error adding user:', error);
-          // Handle error
+          
         }
       );
+    }else {
+      this.errorMessage = 'Please fill all the required information';
     }
-    this.goToPage(``);
   }
 
   goToPage(pageName: String){

@@ -3,36 +3,12 @@
 <header style="background-color: #333;">
     <div class="button-container">
         <a (click)="goToPage('account')">My Account</a>
-        <a href="profile">Logout</a>
+        <a (click)="logout()">Logout</a>
     </div>
 </header>
-<!-- <p>user-home works!</p>
-<div class="button-row">
-    <button (click)="goToPage('register')">register</button>
-</div>
-<div class="button-row">
-    <button (click)="goToPage('home')">user-home</button>
-</div>
-<div class="button-row">
-    <button (click)="goToPage('account')">profile</button>
-</div>
-<div class="button-row">
-    <button (click)="goToPage('createJob')">create a job</button>
-</div>
-<div class="button-row">
-    <button (click)="goToPage('')">home</button>
-</div> -->
-
-<!-- <header [style.backgroundColor]="'crimson'">
-    <div>
-      <a routerLink="/user-profile">My Account</a>
-    </div>
-    <div>
-      <a routerLink="/logout">Logout</a>
-    </div>
-  </header> -->
   <main>
     <h1>Welcome to University of Central Missouri Alums</h1>
+    <h1>Hello {{UserName}} </h1>
     <div class="section">
         <h2>Find a Job</h2>
         <p>
@@ -67,7 +43,7 @@
     
       <div class="section">
         <div>
-          <a routerLink="/post-job">Are you hiring?</a> Please help one of your
+          <a routerLink="/createJob">Are you hiring?</a> Please help one of your
           alumni get a job.
         </div>
       </div>

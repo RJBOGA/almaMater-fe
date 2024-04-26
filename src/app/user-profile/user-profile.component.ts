@@ -24,12 +24,15 @@ export class UserProfileComponent implements OnInit {
   disabled: boolean = false;
   studentId: any;
 
-  constructor(private http: HttpClient, private userService: UserService, private fb: FormBuilder, private jobServ: JobService, private cookieService: CookieService) { }
+  constructor(private http: HttpClient, private userService: UserService, private fb: FormBuilder, private jobServ: JobService, private cookieService: CookieService, private router:Router, private app:AppModule) { }
 
   ngOnInit(): void {
-    // Fetch user details from session storage or API call
+    const loggedIn = sessionStorage.getItem('isLoggedIn');
+    if(loggedIn != 'YES'){
+      console.log(loggedIn)
+      this.router.navigate([``]);
+    }
     this.studentId = this.cookieService.get('studentId');
-    this.user = JSON.parse(sessionStorage.getItem('studentDetails')||"");
     this.user = JSON.parse(sessionStorage.getItem('studentDetails')||"");
     this.fetchJobs();
     // Initialize edit form with user details
@@ -82,18 +85,20 @@ export class UserProfileComponent implements OnInit {
 
   deleteJob(jobId: number): void {
     if (confirm("Are you sure you want to delete this job?")) {
-      this.jobServ.deleteJob(this.studentId, jobId).subscribe(
+      this.jobServ.deleteJob( jobId).subscribe(
         response => {
           console.log('Job deleted successfully:', response);
-          // Refresh the jobs list after deletion
           this.fetchJobs();
         },
         error => {
           console.error('Error deleting job:', error);
-          // Handle error
         }
       );
     }
+  }
+
+  logout(){
+    this.app.logout();
   }
   
 }
